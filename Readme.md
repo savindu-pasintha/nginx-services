@@ -1,7 +1,9 @@
 # Run single service
 sudo nano /etc/nginx/sites-available/myapp.conf
 sudo rm /etc/nginx/sites-available/myapp.conf
-`server {
+
+`
+server {
     listen 80;
     server_name 34.19.106.24;  # Replace with your server's public IP or domain name
  
