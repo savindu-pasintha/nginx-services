@@ -62,6 +62,15 @@ sudo systemctl restart nginx
 echo "Check Nginx status to verify restart.."
 sudo systemctl status nginx --no-pager
 
+echo "Enabling UFW firewall..."
+sudo ufw enable
+
+echo "Allowing HTTP traffic (port 80) through UFW..."
+sudo ufw allow 80/tcp
+
+echo "Allowing custom port (e.g., 3000) through UFW..."
+sudo ufw allow 3000/tcp
+
 echo "Nginx configuration setup for app1 complete."
 
 echo "Define variables and Navigate to your Next.js application directory.."
