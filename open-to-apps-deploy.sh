@@ -30,24 +30,18 @@ echo "Listing installed Node.js versions..."
 echo "Installed Node.js versions:"
 nvm ls
 
-#!/bin/bash
-
-# Clone Nginx configuration from GitHub
 echo "Cloning Nginx configuration from GitHub..."
 git clone https://github.com/savindu-pasintha/nginx-services.git /tmp/nginx-services
 
-# Check if the clone was successful
 if [ $? -ne 0 ]; then
     echo "Failed to clone Nginx configuration. Exiting."
     exit 1
 fi
 
-# Copy Nginx configuration to sites-available directory
 echo "Copying Nginx configuration to /etc/nginx/sites-available/app1..."
 sudo cp /tmp/nginx-services/nginx.conf /etc/nginx/sites-available/app1
 
-# Create a symbolic link from sites-available to sites-enabled
-echo "Creating symbolic link..."
+echo "Create a symbolic link from sites-available to sites-enabled..."
 sudo ln -s /etc/nginx/sites-available/app1 /etc/nginx/sites-enabled/
 
 # Test Nginx configuration
@@ -62,66 +56,57 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Restart Nginx to apply the new configuration
-echo "Restarting Nginx..."
+echo "Restart Nginx to apply the new configuration..."
 sudo systemctl restart nginx
 
-# Check Nginx status to verify restart
+echo "Check Nginx status to verify restart.."
 sudo systemctl status nginx --no-pager
 
 echo "Nginx configuration setup for app1 complete."
 
-# Define variables and Navigate to your Next.js application directory
+echo "Define variables and Navigate to your Next.js application directory.."
 REPO_URL="https://github.com/username/my-project.git"
 BRANCH_NAME="development"
 CLONE_DIR="my-project"
 
-# Clone the repository
-echo "Cloning repository from $REPO_URL..."
+echo "Cloning PROJECT repository from $REPO_URL..."
 git clone $REPO_URL $CLONE_DIR
 
-# Navigate into the cloned repository directory
+echo "Navigate into the cloned repository directory.."
 cd $CLONE_DIR
 
-# Checkout the specific branch
-echo "Checking out branch '$BRANCH_NAME'..."
+echo "Checkout the specific branch '$BRANCH_NAME'..."
 git checkout $BRANCH_NAME
 
-# Display current branch to verify
 echo "Currently on branch: $(git branch --show-current)"
-
 echo "Repository clone and branch checkout completed."
 
-# Update npm dependencies
-echo "Installing npm dependencies..."
+echo "Installing project npm dependencies..."
 # npm install
 
-# Build your Next.js application (if needed)
-echo "Building Next.js application..."
+echo "Building project application..."
 npm run build
 
-# Install pm2 globally (if needed)
+echo "Install pm2 globally (if needed)..."
 # npm install pm2 -g
 
-# Start your Next.js application with pm2
-echo "Starting Next.js application with pm2..."
+echo "Starting application with pm2..."
 pm2 start npm --name "app1" -- start
 
-# Save current pm2 process list
+echo "Save current pm2 process list..."
 pm2 save
-
-# Monitor logs and save to file
-echo "Monitoring logs..."
+ 
+echo "Monitor logs and save to file..."
 pm2 logs app1 > app1.log &
 
-# Example of restarting the application
-# echo "Restarting Next.js application..."
-# pm2 restart nextjs-app
+echo "pm2 apps list..."
+pm2 list
 
-# Example of stopping the application
-# echo "Stopping Next.js application..."
-# pm2 stop nextjs-app
+# echo "Restarting  application..."
+# pm2 restart app1
 
-# Example of deleting the application from pm2
-# echo "Deleting Next.js application from pm2..."
-# pm2 delete nextjs-app
+# echo "Stopping application..."
+# pm2 stop app1
+
+# echo "Deleting application from pm2..."
+# pm2 delete app1
