@@ -2,7 +2,7 @@
 
 echo "Downloading and Ubuntu packages..."
 sudo apt-get update
-sudo apt-get install curl nginx certbot python3-certbot-nginx
+sudo apt-get install curl git nginx certbot python3-certbot-nginx
 
 # sudo certbot --nginx -d your_domain
 
