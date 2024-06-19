@@ -37,11 +37,11 @@ nvm ls
 echo "Cloning Nginx configuration from GitHub..."
 git clone https://github.com/savindu-pasintha/nginx-services.git /tmp/nginx-services || { echo "Failed to clone Nginx configuration."; exit 1; }
 
-echo "Copying Nginx configuration to /etc/nginx/sites-available/app1..."
-sudo cp /tmp/nginx-services/nginx.conf /etc/nginx/sites-available/app1
+echo "Copying Nginx configuration to /etc/nginx/sites-available.."
+sudo cp /tmp/nginx-services/app.conf /etc/nginx/sites-available/
 
 echo "Creating a symbolic link from sites-available to sites-enabled..."
-sudo ln -s /etc/nginx/sites-available/app1 /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/
 
 echo "Testing Nginx configuration..."
 sudo nginx -t || { echo "Nginx configuration test failed."; sudo rm /etc/nginx/sites-enabled/app1; exit 1; }
