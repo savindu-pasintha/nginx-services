@@ -139,15 +139,14 @@ pm2 logs app1 > app1.log &
 echo "Listing pm2 apps..."
 pm2 list
 
-# Uncomment the following lines if needed
-# echo "Restarting application..."
-# pm2 restart app1
+echo "Restarting application..."
+pm2 restart app1
 
-# echo "Stopping application..."
-# pm2 stop app1
+echo "Stopping application..."
+pm2 stop app1
 
-# echo "Deleting application from pm2..."
-# pm2 delete app1
+echo "Deleting application from pm2..."
+pm2 delete app1
 
 
 `
